@@ -33,27 +33,21 @@
         {{if . }}
 
         <section>
-            <table>
-                <tr>
-                    <td colspan="3">
-                        <form method="post" action="/clear">
-                            <input type="submit" value="Clear" />
-                        </form>
-                    </td>
-                </tr>
-                {{range $index, $entry := . }}
-                <tr>
-                    <td> {{$entry.Label}} </td>
-                    <td>
-                        <textarea id="content{{ $index }}" style="display:none">
+            {{range $index, $entry := . }}
+            <p>
+                <label>{{$entry.Label}}</label>
+                <textarea id="content{{ $index }}" style="display:none">
                         {{ $entry.Content }}
                         </textarea>
-                        <input readonly="readonly" value="***************" />
-                    </td>
-                    <td> <button id="copy{{ $index }}" onclick="doCopy('{{ $index }}')">copy</button> </td>
-                </tr>
-                {{end}}
-            </table>
+                <input readonly="readonly" value="********************" />
+                <button id="copy{{ $index }}" onclick="doCopy('{{ $index }}')">copy</button>
+            </p>
+            {{end}}
+            <form method="post" action="/clear">
+                <p>
+                    <input type="submit" value="Clear" />
+                </p>
+            </form>
         </section>
 
         {{ end }}
