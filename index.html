@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/simple.css">
+    <title>Clip Server</title>
+</head>
+
+<body>
+    <header>
+        <h3>Clipboard Server</h3>
+    </header>
+
+    <main>
+        <section>
+            <form method="post" action="/save">
+                <p>
+                    <label>Label</label>
+                    <input type="text" name="label" />
+                </p>
+                <p>
+                    <label>Content</label>
+                    <textarea rows="2" name="content"></textarea>
+                </p>
+                <p>
+                    <input type="submit" value="Save" />
+                </p>
+            </form>
+        </section>
+
+        {{if . }}
+
+        <section>
+            <table>
+                <tr>
+                    <td colspan="3">
+                        <form method="post" action="/clear">
+                            <input type="submit" value="Clear" />
+                        </form>
+                    </td>
+                </tr>
+                {{range $index, $entry := . }}
+                <tr>
+                    <td> {{$entry.Label}} </td>
+                    <td>
+                        <textarea id="content{{ $index }}" style="display:none">
+                        {{ $entry.Content }}
+                        </textarea>
+                        <input readonly="readonly" value="***************" />
+                    </td>
+                    <td> <button id="copy{{ $index }}" onclick="doCopy('{{ $index }}')">copy</button> </td>
+                </tr>
+                {{end}}
+            </table>
+        </section>
+
+        {{ end }}
+    </main>
+
+    <footer>
+        <p><a href="//github.com/abiosoft/clipserver">Github</p>
+    </footer>
+
+    <script lang="javascript">
+        function doCopy(index) {
+            content = document.getElementById("content" + index).value
+            if (!content) {
+                console.error("could not copy to clipboard")
+            }
+
+            navigator.clipboard.writeText(content)
+            const btnCopy = document.getElementById("copy" + index);
+            btnCopy.innerHTML = "copied"
+            btnCopy.disabled = true
+            setTimeout(function () {
+                btnCopy.innerHTML = "copy"
+                btnCopy.disabled = false
+            }, 3000)
+        }
+    </script>
+</body>
+
+</html>
