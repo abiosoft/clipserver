@@ -70,7 +70,7 @@
                 console.error("could not copy to clipboard")
             }
 
-            navigator.clipboard.writeText(content)
+            navigator.clipboard.writeText(content.trim())
             const btnCopy = document.getElementById("copy" + index);
             btnCopy.innerHTML = "copied"
             btnCopy.disabled = true
