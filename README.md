@@ -1,0 +1,2 @@
+# clipserver
+Minimal clipboard server
