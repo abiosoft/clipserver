@@ -1,5 +1,6 @@
 # clipserver
-Barebones clipboard server.
+
+Barebones clipboard server for devices on same local network.
 
 ## Installing
 
