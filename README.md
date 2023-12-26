@@ -1,6 +1,14 @@
 # clipserver
 Barebones clipboard server.
 
+## Installing
+
+Requires [Go](https://go.dev/dl).
+
+```
+go install github.com/abiosoft/clipserver@latest
+```
+
 ## Usage
 
 ```
